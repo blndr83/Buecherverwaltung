@@ -53,7 +53,7 @@
                         <td>@book.ArticleNumber</td>
                         <td @ondblclick="(() => ShowEditTileDialog(book))">@book.Title</td>
                         <td><input type="checkbox" checked="@book.IsLoaned" @oninput="(async e => await bookViewModel.UpdateIsLoaned((bool)e.Value, book.ArticleNumber))" /></td>
-                        <td><button class="btn btn-primary btn-sm" @onclick="(async () => await bookViewModel.Delete(book.ArticleNumber))">Delete</button></td>
+                        <td><button title="Delete" class="btn btn-primary btn-sm" @onclick="(async () => await bookViewModel.Delete(book.ArticleNumber))"><span class="oi oi-circle-x" aria-hidden="true"></span></button></td>
                     </tr>
                 }
             }
