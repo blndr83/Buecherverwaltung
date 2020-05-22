@@ -1,0 +1,96 @@
+﻿@page "/books"
+@using  Buecherverwaltung.Client.ViewModels
+@using Buecherverwaltung.Client.Models
+@using Buecherverwaltung.Client.Dialogs
+@using Buecherverwaltung.Client.Services
+@inject HttpService httpService
+
+<div>
+    <h1>@bookViewModel.Titel</h1>
+    <table style="margin:10px">
+        <tbody>
+            <tr>
+                <td><label>Article number</label></td>
+                <td><input type="text" style="width:132px;" @bind-value="bookViewModel.BookArticleNumber"  @bind-value:event="oninput"/></td>
+            </tr>
+            <tr>
+                <td><label>Title </label></td>
+                <td><input type="text" style="width:132px;" @bind-value="bookViewModel.BookTitle" @bind-value:event="oninput" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button style="width:132px; margin:2px" type="submit" disabled="@bookViewModel.CanNotAdd" @onclick="(async () => await bookViewModel.Add())">Add</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <table style="margin:10px">
+        <tbody>
+            <tr>
+                <td><label>Enter search text</label></td>
+                <td><input type="text" style="width:132px;" @bind="bookViewModel.SearchText" /></td>
+                <td><button style="width:132px; margin:2px" @onclick="(async () => await bookViewModel.UpdateDisplayedBooks())">Search</button></td>
+            </tr>
+            <tr>
+                <td>Show only loaned books</td>
+                <td><input type="checkbox" @bind="bookViewModel.ShowOnlyLoanedBooks"  @oninput="(async e => await bookViewModel.UpateShowOnlyLoanedBooks((bool)e.Value))"/></td>
+            </tr>
+        </tbody>
+    </table>
+    <table style="margin:10px">
+        <thead>
+            <tr>
+                <th>Article number</th>
+                <th>Title</th>
+                <th>Loaned</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (bookViewModel.Books != null)
+            {
+                @foreach (var book in bookViewModel.Books)
+                {
+                    <tr>
+                        <td>@book.ArticleNumber</td>
+                        <td @ondblclick="(() => ShowEditTileDialog(book))">@book.Title</td>
+                        <td><input type="checkbox" checked="@book.IsLoaned" @oninput="(async e => await bookViewModel.UpdateIsLoaned((bool)e.Value, book.ArticleNumber))" /></td>
+                        <td><button @onclick="(async () => await bookViewModel.Delete(book.ArticleNumber))">Delete</button></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+@if (showEditTitleDialog)
+{
+    <EditBookTitleDialog ViewModel="editBookViewModel" />
+}
+
+@functions{
+    EditBookViewModel editBookViewModel;
+    bool showEditTitleDialog;
+    BookViewModel bookViewModel;
+
+    protected async override Task OnInitializedAsync()
+    {
+        bookViewModel = new BookViewModel(httpService);
+        await bookViewModel.InitBooks();
+    }
+
+    private void ShowEditTileDialog(Book book)
+    {
+        editBookViewModel = new EditBookViewModel(httpService)
+        {
+            Book = book,
+            OnButtonClick = OnEditTitleDialogButtonClick
+        };
+        showEditTitleDialog = true;
+    }
+
+    private void OnEditTitleDialogButtonClick()
+    {
+        editBookViewModel = null;
+        showEditTitleDialog = false;
+        StateHasChanged();
+    }
+
+}

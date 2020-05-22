@@ -1,0 +1,26 @@
+﻿@using Buecherverwaltung.Client.ViewModels;
+
+    <div class="dialog-container">
+        <div class="dialog">
+            <div class="dialog-title">
+                <h2>Eidt Book Title</h2>
+            </div>
+            <form class="dialog-body">
+                <table>
+                    <tr>
+                        <td>Title</td>
+                        <td><input type="text" bind-value-oninput="@ViewModel.Book.Title"/></td>
+                    </tr>
+                </table>
+            </form>
+            <div class="dialog-buttons">
+                <button class="btn btn-secondary mr-auto" @onclick="(() => ViewModel.OnButtonClick())">Cancel</button>
+                <button class="btn btn-success ml-auto" disabled="@ViewModel.CanNotUpdate" @onclick="(async() => await ViewModel.Update())">Ok</button>
+            </div>
+        </div>
+    </div>
+
+@functions{ 
+    [Parameter]
+    public EditBookViewModel ViewModel { get; set; }
+}
