@@ -1,9 +1,6 @@
-﻿@page "/"
-@using  Buecherverwaltung.Client.ViewModels
-@using Buecherverwaltung.Client.Models
+﻿@inherits BooksBase
 @using Buecherverwaltung.Client.Dialogs
-@using Buecherverwaltung.Client.Services
-@inject HttpService httpService
+@page "/"
 
 <div>
     <h1>@bookViewModel.Titel</h1>
@@ -11,7 +8,7 @@
         <tbody>
             <tr>
                 <td><label>Article number</label></td>
-                <td><input type="text" style="width:132px;" @bind-value="bookViewModel.BookArticleNumber"  @bind-value:event="oninput"/></td>
+                <td><input type="text" style="width:132px;" @bind-value="bookViewModel.BookArticleNumber" @bind-value:event="oninput" /></td>
             </tr>
             <tr>
                 <td><label>Title </label></td>
@@ -32,7 +29,7 @@
             </tr>
             <tr>
                 <td>Show only loaned books</td>
-                <td><input type="checkbox" @bind="bookViewModel.ShowOnlyLoanedBooks"  @oninput="(async e => await bookViewModel.UpateShowOnlyLoanedBooks((bool)e.Value))"/></td>
+                <td><input type="checkbox" @bind="bookViewModel.ShowOnlyLoanedBooks" @oninput="(async e => await bookViewModel.UpateShowOnlyLoanedBooks((bool)e.Value))" /></td>
             </tr>
         </tbody>
     </table>
@@ -65,32 +62,3 @@
     <EditBookTitleDialog ViewModel="editBookViewModel" />
 }
 
-@functions{
-    EditBookViewModel editBookViewModel;
-    bool showEditTitleDialog;
-    BookViewModel bookViewModel;
-
-    protected async override Task OnInitializedAsync()
-    {
-        bookViewModel = new BookViewModel(httpService);
-        await bookViewModel.InitBooks();
-    }
-
-    private void ShowEditTileDialog(Book book)
-    {
-        editBookViewModel = new EditBookViewModel(httpService)
-        {
-            Book = book,
-            OnButtonClick = OnEditTitleDialogButtonClick
-        };
-        showEditTitleDialog = true;
-    }
-
-    private void OnEditTitleDialogButtonClick()
-    {
-        editBookViewModel = null;
-        showEditTitleDialog = false;
-        StateHasChanged();
-    }
-
-}
