@@ -22,7 +22,7 @@ namespace Buecherverwaltung.Client.ViewModels
 
         public async Task Update()
         {
-            var json = await _httpService.Put(Book, Constants.Book);
+            var json = await _httpService.Put(Book, Constants.BookApiUri);
             var updated = JsonConvert.DeserializeObject<int>(json);
             if(updated > 0) OnButtonClick();
         }

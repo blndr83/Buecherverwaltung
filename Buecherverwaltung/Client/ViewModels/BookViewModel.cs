@@ -19,7 +19,7 @@ namespace Buecherverwaltung.Client.ViewModels
         public IList<Book> Books { get; set; }
         public async Task InitBooks()
         {
-            var json = await _httpService.Get(Constants.Book);
+            var json = await _httpService.Get(Constants.BookApiUri);
             Books = JsonConvert.DeserializeObject<IList<Book>>(json);
         }        
 
@@ -38,7 +38,7 @@ namespace Buecherverwaltung.Client.ViewModels
         public async Task Add()
         {
             var newBook = new Book { ArticleNumber = BookArticleNumber, Title = BookTitle, IsLoaned = false };
-            var json = await _httpService.Post(newBook, Constants.Book);
+            var json = await _httpService.Post(newBook, Constants.BookApiUri);
             var added = JsonConvert.DeserializeObject<int>(json);
             if (added > 0)
             {
@@ -53,14 +53,14 @@ namespace Buecherverwaltung.Client.ViewModels
         {
             var book = Books.First(_ => _.ArticleNumber.Equals(articleNumber));
             book.IsLoaned = isLoaned;
-            var json = await _httpService.Put(book, Constants.Book);
+            var json = await _httpService.Put(book, Constants.BookApiUri);
             var updated = JsonConvert.DeserializeObject<int>(json);
             if (updated > 0 && ShowOnlyLoanedBooks && !isLoaned) Books.Remove(book);
         }
 
         public async Task Delete(string articleNumber)
         {
-            var json = await _httpService.Delete(articleNumber, Constants.Book);
+            var json = await _httpService.Delete(articleNumber, Constants.BookApiUri);
             var deleted = JsonConvert.DeserializeObject<int>(json);
             if(deleted > 0)
             {
@@ -80,7 +80,7 @@ namespace Buecherverwaltung.Client.ViewModels
         {
             var showOnlyLoanedBooks = JsonConvert.ToString(ShowOnlyLoanedBooks);
             var parameters = string.IsNullOrEmpty(SearchText) ? showOnlyLoanedBooks : $"{SearchText}/{showOnlyLoanedBooks}";
-            var json = await _httpService.Get(Constants.Book, parameters);
+            var json = await _httpService.Get(Constants.BookApiUri, parameters);
             Books = JsonConvert.DeserializeObject<IList<Book>>(json);
         }
 

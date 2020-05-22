@@ -8,6 +8,6 @@ namespace Buecherverwaltung.Client
 {
     public class Constants
     {
-        public const string Book = "api/book";
+        public const string BookApiUri = "api/book";
     }
 }
