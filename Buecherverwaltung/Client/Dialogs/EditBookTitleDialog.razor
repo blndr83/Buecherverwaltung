@@ -9,7 +9,7 @@
                 <table>
                     <tr>
                         <td>Title</td>
-                        <td><input type="text" bind-value-oninput="@ViewModel.Book.Title"/></td>
+                        <td><input type="text" @bind-value="@ViewModel.Book.Title" @bind-value:event="oninput"/></td>
                     </tr>
                 </table>
             </form>

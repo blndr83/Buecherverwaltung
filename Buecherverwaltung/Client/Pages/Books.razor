@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td><button style="width:132px; margin:2px" type="submit" disabled="@bookViewModel.CanNotAdd" @onclick="(async () => await bookViewModel.Add())">Add</button></td>
+                <td><button class="btn btn-primary btn-sm" style="width:132px; margin:2px" type="submit" disabled="@bookViewModel.CanNotAdd" @onclick="(async () => await bookViewModel.Add())">Add</button></td>
             </tr>
         </tbody>
     </table>
@@ -28,7 +28,7 @@
             <tr>
                 <td><label>Enter search text</label></td>
                 <td><input type="text" style="width:132px;" @bind="bookViewModel.SearchText" /></td>
-                <td><button style="width:132px; margin:2px" @onclick="(async () => await bookViewModel.UpdateDisplayedBooks())">Search</button></td>
+                <td><button class="btn btn-primary btn-sm" style="width:132px; margin:2px" @onclick="(async () => await bookViewModel.UpdateDisplayedBooks())">Search</button></td>
             </tr>
             <tr>
                 <td>Show only loaned books</td>
@@ -53,7 +53,7 @@
                         <td>@book.ArticleNumber</td>
                         <td @ondblclick="(() => ShowEditTileDialog(book))">@book.Title</td>
                         <td><input type="checkbox" checked="@book.IsLoaned" @oninput="(async e => await bookViewModel.UpdateIsLoaned((bool)e.Value, book.ArticleNumber))" /></td>
-                        <td><button @onclick="(async () => await bookViewModel.Delete(book.ArticleNumber))">Delete</button></td>
+                        <td><button class="btn btn-primary btn-sm" @onclick="(async () => await bookViewModel.Delete(book.ArticleNumber))">Delete</button></td>
                     </tr>
                 }
             }
