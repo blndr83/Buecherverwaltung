@@ -59,7 +59,7 @@ namespace Buecherverwaltung.Server.Services
 
         protected async Task<IList<TEntity>> GetAll()
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet.AsNoTracking().ToListAsync();
         }
 
         protected async Task<int> Remove(TEntity entity)
