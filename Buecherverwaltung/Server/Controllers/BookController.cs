@@ -18,20 +18,20 @@ namespace Buecherverwaltung.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IList<BookDto>>> GetAll()
+        public async Task<ActionResult<IReadOnlyList<BookDto>>> GetAll()
         {
             var books = await _bookService.Books();
             return Ok(books);
         }
 
         [HttpGet("{searchText}/{showOnlyLoanedBooks}")]
-        public async Task<ActionResult<IList<BookDto>>> Get(string searchText, bool showOnlyLoanedBooks)
+        public async Task<ActionResult<IReadOnlyList<BookDto>>> Get(string searchText, bool showOnlyLoanedBooks)
         {
             return Ok(await _bookService.Get(searchText, showOnlyLoanedBooks));
         }
 
         [HttpGet("{showOnlyLoanedBooks}")]
-        public async Task<ActionResult<IList<BookDto>>> Get(bool showOnlyLoanedBooks)
+        public async Task<ActionResult<IReadOnlyList<BookDto>>> Get(bool showOnlyLoanedBooks)
         {
             return Ok(await _bookService.Get(showOnlyLoanedBooks));
         }
