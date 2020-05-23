@@ -1,6 +1,6 @@
-﻿namespace Buecherverwaltung.Client.Models
+﻿namespace Buecherverwaltung.Server.Core.Entities
 {
-    public partial class Book
+    public partial class Book : Entity 
     {
         public string ArticleNumber { get; set; }
         public string Title { get; set; }

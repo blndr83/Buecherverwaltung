@@ -1,14 +1,10 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Linq;
-using Buecherverwaltung.Server.OrMapper;
-using Buecherverwaltung.Server.Services;
-using Microsoft.EntityFrameworkCore;
+using Buecherverwaltung.Server.Infrastructure;
+using Buecherverwaltung.Server.Application;
 
 namespace Buecherverwaltung.Server
 {
@@ -26,11 +22,10 @@ namespace Buecherverwaltung.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson();
-            services.AddDbContext<BuecherverwaltungDatenbankContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Singleton);
-            services.AddSingleton<DbContext, BuecherverwaltungDatenbankContext>();
-            services.AddSingleton<IBookService, BookService>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddInfrastructure(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddApplication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

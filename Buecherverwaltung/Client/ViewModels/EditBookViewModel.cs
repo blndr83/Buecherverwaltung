@@ -1,4 +1,4 @@
-﻿using Buecherverwaltung.Client.Models;
+﻿using Buecherverwaltung.Shared;
 using Buecherverwaltung.Client.Services;
 using Newtonsoft.Json;
 using System;
@@ -14,7 +14,7 @@ namespace Buecherverwaltung.Client.ViewModels
         {
             _httpService = httpService;
         }
-        public Book Book { get; set; }
+        public BookDto Book { get; set; }
 
         public bool CanNotUpdate => string.IsNullOrWhiteSpace(Book.Title);
 

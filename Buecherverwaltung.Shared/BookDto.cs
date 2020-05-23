@@ -1,6 +1,6 @@
-﻿namespace Buecherverwaltung.Server.OrMapper.Models
+﻿namespace Buecherverwaltung.Shared
 {
-    public partial class Book : Entity 
+    public partial class BookDto
     {
         public string ArticleNumber { get; set; }
         public string Title { get; set; }

@@ -1,9 +1,9 @@
-﻿using Buecherverwaltung.Server.OrMapper.Models;
+﻿using Buecherverwaltung.Server.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Buecherverwaltung.Server.OrMapper
+namespace Buecherverwaltung.Server.Infrastructure.Database
 {
-    public class BuecherverwaltungDatenbankContext : DbContext
+    internal class BuecherverwaltungDatenbankContext : DbContext
     {
         public virtual DbSet<Book> Books { get; set; }
 

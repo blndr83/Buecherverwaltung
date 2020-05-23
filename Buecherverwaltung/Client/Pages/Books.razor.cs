@@ -1,4 +1,4 @@
-﻿using Buecherverwaltung.Client.Models;
+﻿using Buecherverwaltung.Shared;
 using Buecherverwaltung.Client.Services;
 using Buecherverwaltung.Client.ViewModels;
 using Microsoft.AspNetCore.Components;
@@ -20,7 +20,7 @@ namespace Buecherverwaltung.Client.Pages
             await bookViewModel.InitBooks();
         }
 
-        protected void ShowEditTileDialog(Book book)
+        protected void ShowEditTileDialog(BookDto book)
         {
             editBookViewModel = new EditBookViewModel(HttpService)
             {

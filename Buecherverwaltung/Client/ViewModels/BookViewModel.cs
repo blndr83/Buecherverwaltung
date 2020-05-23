@@ -1,4 +1,4 @@
-﻿using Buecherverwaltung.Client.Models;
+﻿using Buecherverwaltung.Shared;
 using Buecherverwaltung.Client.Services;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -16,11 +16,11 @@ namespace Buecherverwaltung.Client.ViewModels
             _httpService = httpService;
         }
 
-        public IList<Book> Books { get; set; }
+        public IList<BookDto> Books { get; set; }
         public async Task InitBooks()
         {
             var json = await _httpService.Get(Constants.BookApiUri);
-            Books = JsonConvert.DeserializeObject<IList<Book>>(json);
+            Books = JsonConvert.DeserializeObject<IList<BookDto>>(json);
         }        
 
         public string Titel => "Books";
@@ -37,7 +37,7 @@ namespace Buecherverwaltung.Client.ViewModels
 
         public async Task Add()
         {
-            var newBook = new Book { ArticleNumber = BookArticleNumber, Title = BookTitle, IsLoaned = false };
+            var newBook = new BookDto { ArticleNumber = BookArticleNumber, Title = BookTitle, IsLoaned = false };
             var json = await _httpService.Post(newBook, Constants.BookApiUri);
             var added = JsonConvert.DeserializeObject<int>(json);
             if (added > 0)
@@ -81,7 +81,7 @@ namespace Buecherverwaltung.Client.ViewModels
             var showOnlyLoanedBooks = JsonConvert.ToString(ShowOnlyLoanedBooks);
             var parameters = string.IsNullOrEmpty(SearchText) ? showOnlyLoanedBooks : $"{SearchText}/{showOnlyLoanedBooks}";
             var json = await _httpService.Get(Constants.BookApiUri, parameters);
-            Books = JsonConvert.DeserializeObject<IList<Book>>(json);
+            Books = JsonConvert.DeserializeObject<IList<BookDto>>(json);
         }
 
     }

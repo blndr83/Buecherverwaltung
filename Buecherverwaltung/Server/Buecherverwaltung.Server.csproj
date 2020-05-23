@@ -7,10 +7,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Buecherverwaltung.Server.Application\Buecherverwaltung.Server.Application.csproj" />
+    <ProjectReference Include="..\..\Buecherverwaltung.Server.Infrastructure\Buecherverwaltung.Server.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Buecherverwaltung.Shared\Buecherverwaltung.Shared.csproj" />
     <ProjectReference Include="..\Client\Buecherverwaltung.Client.csproj" />
   </ItemGroup>
 
