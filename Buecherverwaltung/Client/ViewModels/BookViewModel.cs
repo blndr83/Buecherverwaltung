@@ -32,8 +32,6 @@ namespace Buecherverwaltung.Client.ViewModels
         [Required]
         public string BookTitle { get; set; }
 
-        public bool CanNotAdd => string.IsNullOrWhiteSpace(BookArticleNumber) || string.IsNullOrWhiteSpace(BookTitle);
-
         public string SearchText { get; set; }
 
         public bool ShowOnlyLoanedBooks { get; set; }
