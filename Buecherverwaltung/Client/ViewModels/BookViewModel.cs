@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Buecherverwaltung.Client.ViewModels
 {
@@ -25,8 +26,10 @@ namespace Buecherverwaltung.Client.ViewModels
 
         public string Titel => "Books";
 
+        [Required]
         public string BookArticleNumber { get; set; }
 
+        [Required]
         public string BookTitle { get; set; }
 
         public bool CanNotAdd => string.IsNullOrWhiteSpace(BookArticleNumber) || string.IsNullOrWhiteSpace(BookTitle);

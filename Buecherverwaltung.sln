@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buecherverwaltung.Server.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buecherverwaltung.Server.Infrastructure", "Buecherverwaltung.Server.Infrastructure\Buecherverwaltung.Server.Infrastructure.csproj", "{75583C20-C884-403A-8AD0-C0F78B0881BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buecherverwaltung.Shared", "Buecherverwaltung.Shared\Buecherverwaltung.Shared.csproj", "{8B326BA1-1857-4A58-809A-EAD69EFCFAC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buecherverwaltung.Shared", "Buecherverwaltung.Shared\Buecherverwaltung.Shared.csproj", "{8B326BA1-1857-4A58-809A-EAD69EFCFAC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buecherverwaltung.Server.Application", "Buecherverwaltung.Server.Application\Buecherverwaltung.Server.Application.csproj", "{804CC908-7788-4505-8393-D2490278946A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Buecherverwaltung.Server.Application", "Buecherverwaltung.Server.Application\Buecherverwaltung.Server.Application.csproj", "{804CC908-7788-4505-8393-D2490278946A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

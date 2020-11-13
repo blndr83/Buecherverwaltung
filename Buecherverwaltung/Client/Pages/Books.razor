@@ -4,22 +4,25 @@
 
 <div>
     <h1>@bookViewModel.Titel</h1>
-    <table style="margin:10px">
-        <tbody>
-            <tr>
-                <td><label>Article number</label></td>
-                <td><input type="text" style="width:132px;" @bind-value="bookViewModel.BookArticleNumber" @bind-value:event="oninput" /></td>
-            </tr>
-            <tr>
-                <td><label>Title </label></td>
-                <td><input type="text" style="width:132px;" @bind-value="bookViewModel.BookTitle" @bind-value:event="oninput" /></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><button class="btn btn-primary btn-sm" style="width:132px; margin:2px" type="submit" disabled="@bookViewModel.CanNotAdd" @onclick="(async () => await bookViewModel.Add())">Add</button></td>
-            </tr>
-        </tbody>
-    </table>
+    <EditForm EditContext="@editContext" OnSubmit="@OnSubmit">
+        <DataAnnotationsValidator />
+        <table style="margin:10px">
+            <tbody>
+                <tr>
+                    <td><label>Article number</label></td>
+                    <td><InputTextOnInput style="width:132px;" @bind-Value="bookViewModel.BookArticleNumber" id="BookArticleNumber"/></td>
+                </tr>
+                <tr>
+                    <td><label>Title </label></td>
+                    <td><InputTextOnInput style="width:132px;" @bind-Value="bookViewModel.BookTitle" id="BookTitle"/></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button class="btn btn-primary btn-sm" style="width:132px; margin:2px" type="submit" disabled="@bookViewModel.CanNotAdd">Add</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </EditForm>
     <table style="margin:10px">
         <tbody>
             <tr>
