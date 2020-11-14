@@ -16,8 +16,6 @@ namespace Buecherverwaltung.Client.ViewModels
         }
         public BookDto Book { get; set; }
 
-        public bool CanNotUpdate => string.IsNullOrWhiteSpace(Book.Title);
-
         public Action OnButtonClick { get; set; }
 
         public async Task Update()

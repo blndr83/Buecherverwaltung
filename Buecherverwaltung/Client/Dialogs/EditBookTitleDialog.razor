@@ -1,26 +1,25 @@
 ﻿@using Buecherverwaltung.Client.ViewModels;
-
+@inherits EditBookTitleDialogBase
     <div class="dialog-container">
         <div class="dialog">
             <div class="dialog-title">
                 <h2>Eidt Book Title</h2>
             </div>
-            <form class="dialog-body">
-                <table>
-                    <tr>
-                        <td>Title</td>
-                        <td><input type="text" @bind-value="@ViewModel.Book.Title" @bind-value:event="oninput"/></td>
-                    </tr>
-                </table>
-            </form>
-            <div class="dialog-buttons">
-                <button class="btn btn-secondary mr-auto" @onclick="(() => ViewModel.OnButtonClick())">Cancel</button>
-                <button class="btn btn-success ml-auto" disabled="@ViewModel.CanNotUpdate" @onclick="(async() => await ViewModel.Update())">Ok</button>
-            </div>
+            <EditForm OnSubmit="@OnSubmit" EditContext="@editContext">
+                <DataAnnotationsValidator />
+                <div class="dialog-body">
+                    <table>
+                        <tr>
+                            <td>Title</td>
+                            <td><InputTextOnInput @bind-Value="@ViewModel.Book.Title" /></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="dialog-buttons">
+                    <button class="btn btn-secondary mr-auto" @onclick="@onCancelClick">Cancel</button>
+                    <button class="btn btn-success ml-auto" type="submit">Ok</button>
+                </div>
+            </EditForm>
         </div>
     </div>
 
-@functions{ 
-    [Parameter]
-    public EditBookViewModel ViewModel { get; set; }
-}
