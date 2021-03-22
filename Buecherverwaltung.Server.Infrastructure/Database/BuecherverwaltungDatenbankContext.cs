@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Buecherverwaltung.Server.Infrastructure.Database
 {
-    internal class BuecherverwaltungDatenbankContext : DbContext
+    public class BuecherverwaltungDatenbankContext : DbContext
     {
         public virtual DbSet<Book> Books { get; set; }
 
@@ -16,6 +16,7 @@ namespace Buecherverwaltung.Server.Infrastructure.Database
         {
             modelBuilder.Entity<Book>(entity =>
             {
+                entity.ToTable("Books");
                 entity.HasKey(e => e.ArticleNumber);
 
                 entity.Property(e => e.ArticleNumber)

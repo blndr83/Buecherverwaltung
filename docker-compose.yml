@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  buecherverwaltung.server:
+    image: ${DOCKER_REGISTRY-}buecherverwaltungserver
+    build:
+      context: .
+      dockerfile: Buecherverwaltung/Server/Dockerfile
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=mssqlServer,1433;Database=Library;User ID=sa;Password=${DB_PASSWORD};Trusted_Connection=False;
+    depends_on:
+      - mssqlServer
+
+  mssqlServer:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    environment:
+     - ACCEPT_EULA=Y
+     - SA_PASSWORD=${DB_PASSWORD}
+     - MSSQL_PID=Express
+    ports:
+      - "5434:1433"

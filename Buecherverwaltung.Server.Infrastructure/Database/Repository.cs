@@ -62,6 +62,11 @@ namespace Buecherverwaltung.Server.Infrastructure.Database
             return await _context.Set<TEntity>().ToListAsync();
         }
 
+        public void Migrate()
+        {
+            _context.Database.Migrate();
+        }
+
         public async Task<int> Update<TEntity>(TEntity entity) where TEntity : Entity
         {
             _context.Set<TEntity>().Update(entity);

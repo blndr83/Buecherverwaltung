@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Buecherverwaltung.Server.Infrastructure;
 using Buecherverwaltung.Server.Application;
+using Buecherverwaltung.Server.Core;
 
 namespace Buecherverwaltung.Server
 {
@@ -31,6 +32,8 @@ namespace Buecherverwaltung.Server
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var repo = app.ApplicationServices.GetRequiredService<IRepository>();
+            repo.Migrate();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

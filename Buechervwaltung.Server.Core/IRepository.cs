@@ -17,5 +17,6 @@ namespace Buecherverwaltung.Server.Core
         Task<TEntity> Find<TEntity>(Expression<Func<TEntity, bool>> expression) where TEntity : Entity;
         Task<IReadOnlyList<TEntity>> FindAll<TEntity>(Expression<Func<TEntity, bool>> expression) where TEntity : Entity;
         Task<IReadOnlyList<TEntity>> GetAll<TEntity>() where TEntity : Entity;
+        void Migrate();
     }
 }
